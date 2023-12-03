@@ -64,3 +64,10 @@ export const logout = asyncError(async(req, res,next) => {
 
 
 })
+
+
+
+export const Profile = () => {
+
+  console.log('hello world')
+}
