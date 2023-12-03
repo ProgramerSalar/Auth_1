@@ -67,7 +67,8 @@ export const logout = asyncError(async(req, res,next) => {
 
 
 
-export const Profile = () => {
+export const Profile = (req, res, next) => {
+  res.send('Profile Page')
 
-  console.log('hello world')
+  console.log('Profile Page')
 }
