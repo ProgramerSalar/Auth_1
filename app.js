@@ -5,6 +5,8 @@ config({
   path: "./data/config.env",
 });
 import cookieParser from "cookie-parser";
+import cors from "cors"
+
 
 // middleware
 app.use(express.json());
