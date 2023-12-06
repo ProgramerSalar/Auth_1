@@ -45,3 +45,8 @@ export const signUp = async(req, res, next) => {
         message:"Register Successfully"
     })
 }
+
+
+export const getProfile = (req, res, next) => {
+    res.send('hello world')
+}
