@@ -55,7 +55,7 @@ export const signUp = asyncError(async (req, res, next) => {
 
 
   let user = await User.create({
-    avatar,
+    // avatar,
     name,
     email,
     password,
