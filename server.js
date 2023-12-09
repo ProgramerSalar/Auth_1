@@ -9,14 +9,14 @@ cloudinary.v2.config({
     api_secret:process.env.CLOUDANARY_API_SECRET,
 })
 
-const signUpload = async () => {
-    const timestamp = Math.round(newDate() /1000);
-    const params = {
-      timestamp: timestamp
-    };
-    const signature = await cloudinary.utils.api_sign_request(params, process.env.CLOUDANARY_API_SECRET);
-    return { timestamp, signature };
-  }
+// const signUpload = async () => {
+//     const timestamp = Math.round(newDate() /1000);
+//     const params = {
+//       timestamp: timestamp
+//     };
+//     const signature = await cloudinary.utils.api_sign_request(params, process.env.CLOUDANARY_API_SECRET);
+//     return { timestamp, signature };
+//   }
 
 
 app.listen(process.env.PORT, () => {

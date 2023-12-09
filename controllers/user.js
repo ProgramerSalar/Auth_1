@@ -42,6 +42,7 @@ export const signUp = asyncError(async (req, res, next) => {
   
   // console.log(req.file)
   let avatar = undefined
+  const timestamp = Math.round(new Date() /1000);
   try{
     if(req.file) {
       const file = getDataUri(req.file)
@@ -54,6 +55,8 @@ export const signUp = asyncError(async (req, res, next) => {
       }
       
     }
+
+    // console.log(timestamp)
   }catch(error){
     console.log(error)
   }
