@@ -40,7 +40,7 @@ export const signUp = async (req, res, next) => {
   
 
   
-  // console.log(req.file)
+  console.log(req.file)
   // let avatar = undefined
   // if(req.file) {
   //   const file = getDataUri(req.file)
