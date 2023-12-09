@@ -35,30 +35,6 @@ export const login = async(req, res, next) => {
 }
 
 
-// export const signUp = async(req, res, next) => {
-
-//     const {name, email, password} = req.body;
-
-//     // avatar 
-//     let avatar = undefined
-//     if(req.file){
-//         const file = getDataUri(req.file)
-//         const myCloud = await cloudanary.v2.uploader.upload(file.content)
-//         avatar = {
-//             public_id:myCloud.public_id,
-//             url:myCloud.secure_url,
-//         }
-//     }
-
-    
-//     await User.create({
-//         avatar,name,email,password
-//     })
-//     res.status(201).json({
-//         success:true,
-//         message:"Register Successfully"
-//     })
-// }
 
 
 export const signUp = async (req, res, next) => {
@@ -67,19 +43,22 @@ export const signUp = async (req, res, next) => {
     
   
     
-  
-    let avatar = undefined;
-    if (req.file) {
-      const file = getDataUri(req.file);
-      const myCloud = await cloudanary.v2.uploader.upload(file.content);
+    // console.log(req.file)
+    let avatar = undefined
+    if(req.file) {
+      const file = getDataUri(req.file)
+      const myCloud = await cloudanary.v2.uploader.upload(file.content)
       avatar = {
         public_id: myCloud.public_id,
         url: myCloud.secure_url,
-      };
+      }
+      
     }
   
-    user = await User.create({
-      // avatar,
+ 
+  
+    let user = await User.create({
+      avatar,
       name,
       email,
       password,
