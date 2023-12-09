@@ -20,9 +20,17 @@ app.use(cors({
 
 // Routes 
 import user from "./routes/user.js"
+import { errorMiddleware } from "./middleware/error.js"
 
 
 
 
 
 app.use('/api/v1/user', user )
+
+
+
+
+
+// error middleware 
+app.use(errorMiddleware)
