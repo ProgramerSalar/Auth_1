@@ -40,23 +40,24 @@ export const signUp = async (req, res, next) => {
   
 
   
-  console.log(req.file)
-  // let avatar = undefined
-  // if(req.file) {
-  //   const file = getDataUri(req.file)
-  //   const myCloud = await cloudanary.v2.uploader.upload(file.content)
-  //   console.log(myCloud)
-    // avatar = {
-    //   public_id: myCloud.public_id,
-    //   url: myCloud.secure_url,
-    // }
+  // console.log(req.file)
+  let avatar = undefined
+  if(req.file) {
+    const file = getDataUri(req.file)
+    // console.log(file)
+    const myCloud = await cloudanary.v2.uploader.upload(file.content)
+    // console.log(myCloud)
+    avatar = {
+      public_id: myCloud.public_id,
+      url: myCloud.secure_url,
+    }
     
-  // }
+  }
 
 
 
   let user = await User.create({
-    // avatar,
+    avatar,
     name,
     email,
     password,
