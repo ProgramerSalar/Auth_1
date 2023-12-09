@@ -34,24 +34,24 @@ export const login = asyncError(async(req, res, next) => {
 
 
 
-export const signUp = asyncError(async (req, res, next) => {
+export const signUp = async (req, res, next) => {
   const { name, email, password } = req.body;
 
   
 
   
   // console.log(req.file)
-  let avatar = undefined
-  if(req.file) {
-    const file = getDataUri(req.file)
-    const myCloud = await cloudanary.v2.uploader.upload(file.content)
-    console.log(myCloud)
+  // let avatar = undefined
+  // if(req.file) {
+  //   const file = getDataUri(req.file)
+  //   const myCloud = await cloudanary.v2.uploader.upload(file.content)
+  //   console.log(myCloud)
     // avatar = {
     //   public_id: myCloud.public_id,
     //   url: myCloud.secure_url,
     // }
     
-  }
+  // }
 
 
 
@@ -68,7 +68,7 @@ export const signUp = asyncError(async (req, res, next) => {
   })
 
 
-})
+}
 
 export const getProfile = (req, res, next) => {
     res.send('hello world')
