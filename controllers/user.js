@@ -45,10 +45,11 @@ export const signUp = asyncError(async (req, res, next) => {
   if(req.file) {
     const file = getDataUri(req.file)
     const myCloud = await cloudanary.v2.uploader.upload(file.content)
-    avatar = {
-      public_id: myCloud.public_id,
-      url: myCloud.secure_url,
-    }
+    console.log(myCloud)
+    // avatar = {
+    //   public_id: myCloud.public_id,
+    //   url: myCloud.secure_url,
+    // }
     
   }
 
