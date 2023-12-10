@@ -1,7 +1,7 @@
 import { asyncError } from "../middleware/error.js";
 import { User } from "../models/user.js";
 import ErrorHandler from "../utils/error.js";
-import {getDataUri, sendEmail} from "../utils/features.js"
+import {getDataUri, sendEmail, sendToken} from "../utils/features.js"
 import cloudanary from "cloudinary";
 
 
@@ -23,11 +23,7 @@ export const login = asyncError(async(req, res, next) => {
       return ErrorHandler("Incorrect Password", 400)
   }
 
-  res.status(200).json({
-    
-      success:true,
-      message:`Welcome back ${user.name}`
-  })
+  sendToken(user, res, 'Login Succussfully', 201)
 
 
 })
@@ -72,10 +68,7 @@ export const signUp = asyncError(async (req, res, next) => {
     password,
     
   });
-  res.status(400).json({
-    success:true,
-    message:'Register Successfully'
-  })
+  sendToken(user, res, 'Register Successfully', 201)
 
 
 })
@@ -85,7 +78,7 @@ export const getProfile = (req, res, next) => {
 }
 
 
-export const forgotPassword  = async(req, res, next) => {
+export const forgotPassword  = asyncError(async(req, res, next) => {
 
   const { email } = req.body;
   const user = await User.findOne({ email });
@@ -124,10 +117,10 @@ export const forgotPassword  = async(req, res, next) => {
 
 
 }
+)
 
 
-
-export const resetPassword = async (req, res, next) => {
+export const resetPassword = asyncError(async (req, res, next) => {
 
   const {otp, password} = req.body
   const user = await User.findOne({
@@ -158,4 +151,4 @@ export const resetPassword = async (req, res, next) => {
   
 
 
-}
+})

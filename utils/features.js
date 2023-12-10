@@ -28,3 +28,20 @@ export const sendEmail = async (subject, to, text) => {
     text,
   });
 };
+
+
+export const sendToken = (user, res, message, statusCode) => {
+  const token = user.generateToken();
+
+  res
+    .status(statusCode)
+    .cookie("token", token, {
+      expires: new Date(Date.now() + 15 * 24 * 60 * 60 * 1000),
+    })
+    .json({
+      token,
+      success: true,
+      message: message,
+      token,
+    });
+};
