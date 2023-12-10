@@ -158,3 +158,14 @@ export const resetPassword = asyncError(async (req, res, next) => {
 
 
 })
+
+export const logout = asyncError(async (req, res, next) => {
+
+
+  res.status(200).cookie("token", "", {
+    expires: new Date(Date.now()),
+  }).json({
+    success: true,
+    message:"Logged Out SuccessFully"
+  });
+});
