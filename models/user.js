@@ -37,11 +37,11 @@ const schema = new mongoose.Schema({
 
 
 // Hash password 
-schema.pre("save", async function (){
-
-    console.log(this.password)
-    this.password = await bcrypt.hash(this.password, 10)
-})
+schema.pre("save", async function (next) {
+    if(!this.isModified("password")) return next()
+    // console.log(this.password);
+    this.password = await bcrypt.hash(this.password, 10); // hash this password in 10 character
+  });
 
 
 // compare password function 

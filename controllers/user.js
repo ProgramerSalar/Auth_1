@@ -1,7 +1,7 @@
 import { asyncError } from "../middleware/error.js";
 import { User } from "../models/user.js";
 import ErrorHandler from "../utils/error.js";
-import {getDataUri} from "../utils/features.js"
+import {getDataUri, sendEmail} from "../utils/features.js"
 import cloudanary from "cloudinary";
 
 
@@ -24,6 +24,7 @@ export const login = asyncError(async(req, res, next) => {
   }
 
   res.status(200).json({
+    
       success:true,
       message:`Welcome back ${user.name}`
   })
@@ -81,4 +82,42 @@ export const signUp = asyncError(async (req, res, next) => {
 
 export const getProfile = (req, res, next) => {
     res.send('hello world')
+}
+
+
+export const forgotPassword  = async(req, res, next) => {
+
+  const {email} = req.body
+  const user = await User.findOne({email})
+
+  // console.log(user)
+  
+  if(!user) return next(new ErrorHandler("Incoreect Email", 401))
+  
+  const randomNumber = Math.random() * (999999 - 100000) + 100000;
+  const otp = Math.floor(randomNumber);
+  const otp_expire = 15 * 60 * 1000;
+
+  user.otp = otp;
+  user.otp_expire = new Date(Date.now() + otp_expire);
+  await user.save();
+  console.log(otp)
+
+  // send Email
+  const message = `You otp for Reseting Password is ${otp}. \n please Ignore if you have not requested this.`
+  try{
+    await sendEmail("Otp for Reseting Password", user.email, message)
+
+  }catch(error){
+    user.otp = null;
+    user.otp_expire = null
+    await user.save()
+    return next(error)
+
+  }
+  res.status(200).json({
+    success:true,
+    message:`Email send to ${user.email}`
+  })
+
 }
