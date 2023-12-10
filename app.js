@@ -14,6 +14,7 @@ app.use(cors({
     methods:["GET","POST","PUT","DELETE"],
     origin:[process.env.FRONTENT_URL_1, process.env.FRONTENT_URL_2],
   }))
+app.use(cookieParser())
 
 
 
@@ -21,6 +22,7 @@ app.use(cors({
 // Routes 
 import user from "./routes/user.js"
 import { errorMiddleware } from "./middleware/error.js"
+import cookieParser from "cookie-parser"
 
 
 

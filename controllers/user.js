@@ -73,8 +73,14 @@ export const signUp = asyncError(async (req, res, next) => {
 
 })
 
-export const getProfile = (req, res, next) => {
-    res.send('hello world')
+export const getProfile = async(req, res, next) => {
+  const user = await User.findById(req.user._id)
+    
+  res.status(200).json({
+    success:true,
+    user
+  })
+
 }
 
 

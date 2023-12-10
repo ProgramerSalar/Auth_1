@@ -1,6 +1,7 @@
 import express from "express"
 import { forgotPassword, getProfile, login, resetPassword, signUp } from "../controllers/user.js"
 import { singleUpload } from "../middleware/multer.js"
+import { isAuthenticated } from "../middleware/auth.js"
 
 
 
@@ -13,7 +14,7 @@ router.route("/forgetpassword").post(forgotPassword).put(resetPassword)
 
 
 
-router.get('/me', getProfile)
+router.get('/me', isAuthenticated,  getProfile)
 
 
 
