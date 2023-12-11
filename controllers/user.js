@@ -169,3 +169,28 @@ export const logout = asyncError(async (req, res, next) => {
     message:"Logged Out SuccessFully"
   });
 });
+
+
+
+
+export const changePassword = async(req,res, next) => {
+
+  const user = await User.findById(req.user._id).select("+password")
+  const {oldPassword, newPassword} = req.body
+
+  if(!newPassword){
+    return next(new ErrorHandler("Incorrect New Password", 400))
+  }
+
+  const isMatched = await user.comparePassword(oldPassword)
+  if(!isMatched) return next(new ErrorHandler("Incorrect Old Password", 400))
+
+  user.password = newPassword
+  await user.save()
+
+  res.status(200).json({
+    success:true,
+    message:"Password changed Successfully"
+  })
+
+}
