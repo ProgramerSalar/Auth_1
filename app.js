@@ -21,7 +21,6 @@ app.use(cookieParser())
 
 // Routes 
 import user from "./routes/user.js"
-import { errorMiddleware } from "./middleware/error.js"
 import cookieParser from "cookie-parser"
 
 
@@ -35,4 +34,5 @@ app.use('/api/v1/user', user )
 
 
 // error middleware 
+import { errorMiddleware } from "./middleware/error.js"
 app.use(errorMiddleware)

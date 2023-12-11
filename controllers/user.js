@@ -9,18 +9,23 @@ import cloudanary from "cloudinary";
 export const login = asyncError(async(req, res, next) => {
 
   const {email, password} = req.body
+  if(!email) return next(new ErrorHandler("Please Enter Email", 400))
+  
   
   const user = await User.findOne({email}).select("+password")
-
-  if(!user){
-      return ErrorHandler("Incorrect Email", 400)
+  if (!user) {
+    return next(new ErrorHandler("Incorrect Email", 400));
   }
+
+  if (!password) return next(new ErrorHandler("Please Enter Password", 400));
+
+  
 
 
   // Handler Error 
   const isMatched = await user.comparePassword(password)
-  if(!isMatched){
-      return ErrorHandler("Incorrect Password", 400)
+  if (!isMatched) {
+    return next(new ErrorHandler("Incorrect Password", 400));
   }
 
   sendToken(user, res, 'Login Succussfully', 201)
