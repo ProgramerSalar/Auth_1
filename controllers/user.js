@@ -220,7 +220,7 @@ export const updateProfile = async(req, res, next) => {
   if(!email){
     return next(new ErrorHandler("Please Enter Email", 400))
   }
-  
+
   if (name) user.name = name
   if (email) user.email = email
 
@@ -230,4 +230,26 @@ export const updateProfile = async(req, res, next) => {
     message:"Profile updated Succefully"
   })
 
+}
+
+
+
+
+export const updatePic = async(req, res, next) => {
+
+  const user = await User.findById(req.user._id)
+
+  const file = getDataUri(req.file)
+  await cloudanary.v2.uploader.destroy(user.avatar.public_id)
+  const myCloud = await cloudanary.v2.uploader.upload(file.content)
+  user.avatar = {
+    public_id: myCloud.public_id,
+    url: myCloud.secure_url
+  }
+  await user.save()
+  res.status(200).json({
+    success:true,
+    message:"Image is Updated Successfully"
+  })
+ 
 }
