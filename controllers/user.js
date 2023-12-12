@@ -184,8 +184,12 @@ export const changePassword = async(req,res, next) => {
   const {oldPassword, newPassword} = req.body
 
   if(!newPassword){
-    return next(new ErrorHandler("Incorrect New Password", 400))
+    return next(new ErrorHandler("Please Enter New Password", 400))
   }
+  if(!oldPassword){
+    return next(new ErrorHandler("Plaase Enter New Password", 400))
+  }
+
 
   const isMatched = await user.comparePassword(oldPassword)
   if(!isMatched) return next(new ErrorHandler("Incorrect Old Password", 400))
