@@ -34,7 +34,7 @@ export const newProduct = asyncError(async (req, res, next) => {
   });
 });
 
-export const getAllProducts = asyncError(async ({ req, res, next }) => {
+export const getAllProducts = async (req, res, next ) => {
   // search and category query;
   const products = await Product.find({});
 
@@ -42,7 +42,7 @@ export const getAllProducts = asyncError(async ({ req, res, next }) => {
     success: true,
     products,
   });
-});
+}
 
 export const getProductDetails = asyncError(async (req, res, next) => {
   const product = await Product.findById(req.params.id);
