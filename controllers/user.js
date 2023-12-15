@@ -37,12 +37,13 @@ export const login = asyncError(async(req, res, next) => {
 
 
 export const signUp = asyncError(async (req, res, next) => {
-  const { name, email, password } = req.body;
+  const { name, email, password, role } = req.body;
 
   
 
   
   // console.log(req.file)
+  // Image 
   let avatar = undefined
   const timestamp = Math.round(new Date() /1000);
   try{
@@ -71,6 +72,7 @@ export const signUp = asyncError(async (req, res, next) => {
     name,
     email,
     password,
+    role,
     
   });
   sendToken(user, res, 'Register Successfully', 201)

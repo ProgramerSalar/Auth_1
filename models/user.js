@@ -25,7 +25,7 @@ const schema = new mongoose.Schema({
     role:{
         type:String,
         enum:["admin", "user"],
-        default:"user"
+        required:[true, "Please Enter admin or User"],
     },
     avatar:{
         public_id:String,
