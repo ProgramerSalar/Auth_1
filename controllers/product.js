@@ -186,17 +186,15 @@ export const deleteCategory = asyncError(async (req, res, next) => {
 
 
 
-export const getAdminProducts = async(req, res, next) => {
+export const getAdminProducts = asyncError(async (req, res, next) => {
+  const products = await Product.find({}).populate("category");
 
-  const products = await Product.findById(req.params.id).populate("category")
-  if(!products) return next(new ErrorHandler("Product not found", 404))
-
-  const outOfStock = products.filter((i) => i.stock === 0)
+  const outOfStock = products.filter((i) => i.stock === 0);
 
   res.status(200).json({
-    success:true,
+    success: true,
     products,
     outOfStock: outOfStock.length,
-    inStock: products.length - outOfStock.length
-  })
-}
+    inStock: products.length - outOfStock.length,
+  });
+});
