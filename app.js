@@ -23,12 +23,14 @@ app.use(cookieParser())
 import user from "./routes/user.js"
 import cookieParser from "cookie-parser"
 import product from "./routes/product.js"
+import order from "./routes/order.js"
 
 
 
 
 app.use('/api/v1/user', user )
 app.use('/api/v1/products', product)
+app.use('/api/v1/order', order)
 
 
 
