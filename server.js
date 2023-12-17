@@ -1,6 +1,8 @@
 import { app } from "./app.js";
 import { connectDB } from "./data/database.js";
 import cloudinary from "cloudinary"
+import Stripe from "stripe"
+
 
 // cloudinary.v2.config({
 //     cloud_name:process.env.CLOUDANARY_NAME,
@@ -16,7 +18,7 @@ cloudinary.v2.config({
 })
 
 
-
+export const stripe = new Stripe(process.env.STRIPE_API_SECRET);
 
 app.listen(process.env.PORT, () => {
     console.log('server is running on port:5000')
