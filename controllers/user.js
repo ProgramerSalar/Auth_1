@@ -217,7 +217,7 @@ export const changePassword = async(req,res, next) => {
 export const updateProfile = async(req, res, next) => {
 
   const user = await User.findById(req.user._id)
-  const {name, email} = req.body 
+  const { name, email, address, city, country, pinCode } = req.body;
 
   if(!name){
     return next(new ErrorHandler("Please Enter name", 400))
@@ -227,8 +227,12 @@ export const updateProfile = async(req, res, next) => {
     return next(new ErrorHandler("Please Enter Email", 400))
   }
 
-  if (name) user.name = name
-  if (email) user.email = email
+  if (name) user.name = name;
+  if (email) user.email = email;
+  if (address) user.address = address;
+  if (city) user.city = city;
+  if (country) user.country = country;
+  if (pinCode) user.pinCode = pinCode;
 
   await user.save()
   res.status(200).json({
