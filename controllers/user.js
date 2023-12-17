@@ -37,7 +37,7 @@ export const login = asyncError(async(req, res, next) => {
 
 
 export const signUp = asyncError(async (req, res, next) => {
-  const { name, email, password, role } = req.body;
+  const { name, email, password, address, city, country, pinCode, role } = req.body;
 
   
 
@@ -72,6 +72,10 @@ export const signUp = asyncError(async (req, res, next) => {
     name,
     email,
     password,
+    address,
+    city,
+    country,
+    pinCode,
     role,
     
   });

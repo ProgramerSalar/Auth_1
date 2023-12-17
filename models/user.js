@@ -22,6 +22,22 @@ const schema = new mongoose.Schema({
         minLength:[4,"Password must be at least 4 character long"],
         select:false
     },
+    address: {
+        type: String,
+        required: true,
+      },
+      city: {
+        type: String,
+        required: true,
+      },
+      country: {
+        type: String,
+        required: true,
+      },
+      pinCode: {
+        type: Number,
+        required: true,
+      },
     role:{
         type:String,
         enum:["admin", "user"],
