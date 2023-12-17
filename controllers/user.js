@@ -219,13 +219,7 @@ export const updateProfile = async(req, res, next) => {
   const user = await User.findById(req.user._id)
   const { name, email, address, city, country, pinCode } = req.body;
 
-  if(!name){
-    return next(new ErrorHandler("Please Enter name", 400))
-  }
-
-  if(!email){
-    return next(new ErrorHandler("Please Enter Email", 400))
-  }
+  
 
   if (name) user.name = name;
   if (email) user.email = email;
